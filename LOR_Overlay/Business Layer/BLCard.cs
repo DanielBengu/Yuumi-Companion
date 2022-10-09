@@ -5,12 +5,12 @@ using System.Text;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using System.Windows.Forms;
 using TranparentOverlay_simpleExample.LOR_Overlay.Deserialization;
-using TransparentOverlay_simpleExample;
+using YuumiCompanion;
 using Newtonsoft.Json;
 using System.Net;
 using System.ComponentModel;
 
-namespace TranparentOverlay_simpleExample.LOR_Overlay.Business_Layer
+namespace YuumiCompanion.LOR_Overlay.Business_Layer
 {
     internal class BLCard
     {

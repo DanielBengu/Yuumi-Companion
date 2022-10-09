@@ -1,5 +1,5 @@
 ﻿
-namespace TransparentOverlay_simpleExample
+namespace YuumiCompanion
 {
     partial class Form1
     {

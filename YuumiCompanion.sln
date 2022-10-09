@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32802.440
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranparentOverlay_simpleExample", "TranparentOverlay_simpleExample.csproj", "{4B537CE3-D24D-403A-922E-EB29FCFD9355}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuumiCompanion", "YuumiCompanion.csproj", "{4B537CE3-D24D-403A-922E-EB29FCFD9355}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

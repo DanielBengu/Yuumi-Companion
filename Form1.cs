@@ -2,9 +2,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using TranparentOverlay_simpleExample.LOR_Overlay.Business_Layer;
+using YuumiCompanion.LOR_Overlay.Business_Layer;
 
-namespace TransparentOverlay_simpleExample
+namespace YuumiCompanion
 {
 
     public partial class Form1 : Form

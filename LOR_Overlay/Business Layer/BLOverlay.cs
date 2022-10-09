@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using static TransparentOverlay_simpleExample.Form1;
+using static YuumiCompanion.Form1;
 
-namespace TranparentOverlay_simpleExample.LOR_Overlay.Business_Layer
+namespace YuumiCompanion.LOR_Overlay.Business_Layer
 {
     internal class BLOverlay
     {

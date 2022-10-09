@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Net;
 
-namespace TranparentOverlay_simpleExample.LOR_Overlay.Business_Layer
+namespace YuumiCompanion.LOR_Overlay.Business_Layer
 {
     internal class BLMultiThread
     {
