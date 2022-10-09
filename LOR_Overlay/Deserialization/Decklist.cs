@@ -4,8 +4,9 @@ using System.Text;
 
 namespace YuumiCompanion.LOR_Overlay.Deserialization
 {
-    internal class CardGallery
+    internal class Decklist
     {
-        public string gameAbsolutePath { get; set; }
+        public string DeckCode { get; set; }
+        public object CardsInDeck { get; set; }
     }
 }

@@ -144,8 +144,8 @@ namespace YuumiCompanion.LOR_Overlay.Business_Layer
 
         private void MaximizeEverything()
         {
-            Form1.Location = BLMultiThread.getTopLeft();
-            Form1.Size = BLMultiThread.getFullScreenSize();
+            Form1.Location = getTopLeft();
+            Form1.Size = getFullScreenSize();
 
             SendMessage(Form1.Handle, WM_SYSCOMMAND, (UIntPtr)myWParam, (IntPtr)myLparam);
         }
@@ -158,15 +158,6 @@ namespace YuumiCompanion.LOR_Overlay.Business_Layer
         {
             oldWindowLong = GetWindowLong(Handle, (int)GetWindowLongConst.GWL_EXSTYLE);
             SetWindowLong(Handle, (int)GetWindowLongConst.GWL_EXSTYLE, Convert.ToInt32(oldWindowLong | (uint)WindowStyles.WS_EX_LAYERED | (uint)WindowStyles.WS_EX_TRANSPARENT));
-        }
-
-        /// <summary>
-        /// Make the form (specified by its handle) a normal type of window (doesn't support transparency).
-        /// </summary>
-        /// <param name="Handle">The Window to make normal</param>
-        public void SetFormNormal(IntPtr Handle)
-        {
-            SetWindowLong(Handle, (int)GetWindowLongConst.GWL_EXSTYLE, Convert.ToInt32(oldWindowLong | (uint)WindowStyles.WS_EX_LAYERED));
         }
 
         /// <summary>
@@ -189,6 +180,51 @@ namespace YuumiCompanion.LOR_Overlay.Business_Layer
             SetFormTransparent(Form1.Handle);
 
             SetTheLayeredWindowAttribute();
+        }
+
+        /// <summary>
+        /// Finds the Size of all computer screens combined (assumes screens are left to right, not above and below).
+        /// </summary>
+        /// <returns>The width and height of all screens combined</returns>
+        public static Size getFullScreenSize()
+        {
+            int height = int.MinValue;
+            int width = 0;
+
+
+            //take largest height
+            height = Math.Max(Screen.PrimaryScreen.WorkingArea.Height, height);
+
+            width += Screen.PrimaryScreen.Bounds.Width;
+
+            /*
+             * foreach (Screen screen in System.Windows.Forms.Screen.AllScreens)
+            {
+                //take largest height
+                height = Math.Max(screen.WorkingArea.Height, height);
+
+                width += screen.Bounds.Width;
+            }*/
+
+            return new Size(width, height);
+        }
+
+        /// <summary>
+        /// Finds the top left pixel position (with multiple screens this is often not 0,0)
+        /// </summary>
+        /// <returns>Position of top left pixel</returns>
+        public static Point getTopLeft()
+        {
+            int minX = int.MaxValue;
+            int minY = int.MaxValue;
+
+            foreach (Screen screen in System.Windows.Forms.Screen.AllScreens)
+            {
+                minX = Math.Min(screen.WorkingArea.Left, minX);
+                minY = Math.Min(screen.WorkingArea.Top, minY);
+            }
+
+            return new Point(minX, minY);
         }
     }
 }

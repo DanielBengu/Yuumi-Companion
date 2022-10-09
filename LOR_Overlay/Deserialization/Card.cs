@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TranparentOverlay_simpleExample.LOR_Overlay.Deserialization
+namespace YuumiCompanion.LOR_Overlay.Deserialization
 {
     internal class Card
     {

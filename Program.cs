@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using YuumiCompanion;
 
-namespace TranparentOverlay_simpleExample
+namespace YuumiCompanion
 {
     static class Program
     {
