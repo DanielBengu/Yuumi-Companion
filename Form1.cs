@@ -10,7 +10,6 @@ namespace YuumiCompanion
 
     public partial class Form1 : Form
     {
-        BLApi blApi;
         BLGameManager blGameManager;
 
         public Form1()
@@ -23,14 +22,27 @@ namespace YuumiCompanion
             BLOverlay blOverlay = new BLOverlay();
             blOverlay.StartupOverlay();
 
-            blApi = new BLApi();
             blGameManager = new BLGameManager();
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
         {
-            if (BLApi.GetGameData().GameState == GameData.GameStateEnum.InProgress)
+            GameData gd = BLApi.GetGameData();
+
+            //blGameManager.UpdateCurrentDecklist();
+
+            if (gd != null && gd.GameState == GameData.GameStateEnum.InProgress)
                 blGameManager.ManageGame();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -30,22 +30,10 @@ namespace YuumiCompanion
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.UserCardList = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // UserCardList
-            // 
-            this.UserCardList.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.UserCardList.Enabled = false;
-            this.UserCardList.FormattingEnabled = true;
-            this.UserCardList.ItemHeight = 15;
-            this.UserCardList.Location = new System.Drawing.Point(12, 12);
-            this.UserCardList.Name = "UserCardList";
-            this.UserCardList.Size = new System.Drawing.Size(211, 664);
-            this.UserCardList.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -68,7 +56,6 @@ namespace YuumiCompanion
             this.BackColor = System.Drawing.Color.LavenderBlush;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.UserCardList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -82,8 +69,6 @@ namespace YuumiCompanion
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox UserCardList;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer RefreshTimer;
     }

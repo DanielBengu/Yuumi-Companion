@@ -1,26 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using YuumiCompanion.LOR_Overlay.Deserialization;
+using YuumiCompanion.LOR_Overlay.Model;
 
 namespace YuumiCompanion.LOR_Overlay.Business_Layer
 {
     internal class BLGameManager
     {
+        public List<CardCanvas> DeckList { get; set; }
+
         public void ManageGame()
         {
-            List<Card> decklist = BLApi.GetDeckList();
+            DeckList = BLApi.GetDeckList();
 
-            RefreshOverlay(decklist);
+            RefreshOverlay();
         }
 
-        private void RefreshOverlay(List<Card> decklist)
+        private void RefreshOverlay()
         {
-            ListBox userCardList = (ListBox)Application.OpenForms["Form1"].Controls["UserCardList"];
-
-            userCardList.DataSource = decklist.Select(card => card.name).ToList();
+            //TODO: CLEAR PREVIOUS DECK BEFORE UPDATING
+            BLOverlay.UpdateCurrentDecklist(DeckList); 
         }
+
+        
     }
 }

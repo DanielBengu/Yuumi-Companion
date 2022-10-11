@@ -4,12 +4,18 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.AxHost;
+using YuumiCompanion.LOR_Overlay.Deserialization;
 using static YuumiCompanion.Form1;
+using YuumiCompanion.LOR_Overlay.Model;
+using System.Linq;
 
 namespace YuumiCompanion.LOR_Overlay.Business_Layer
 {
     internal class BLOverlay
     {
+        #region Startup Section
+
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool BringWindowToTop(IntPtr hWnd);
@@ -135,13 +141,6 @@ namespace YuumiCompanion.LOR_Overlay.Business_Layer
 
         int oldWindowLong;
 
-        Form Form1;
-
-        public BLOverlay()
-        {
-            Form1 = Application.OpenForms["Form1"];
-        }
-
         private void MaximizeEverything()
         {
             Form1.Location = getTopLeft();
@@ -226,5 +225,58 @@ namespace YuumiCompanion.LOR_Overlay.Business_Layer
 
             return new Point(minX, minY);
         }
+        #endregion
+
+        Form Form1;
+
+        private const int startManaX = 20;
+        private const int startCardX = 70;
+        private const int startY = 10;
+
+        private const int manaCardX = 50;
+        private const int manaCardY = 30;
+
+        private const int cardTextX = 150;
+        private const int cardTextY = 30;
+
+        public BLOverlay()
+        {
+            Form1 = Application.OpenForms["Form1"];
+        }
+
+        public static void UpdateCurrentDecklist(List<CardCanvas> deckList)
+        {
+            //PictureBox pb;
+            Label manaLabel;
+            Label cardLabel;
+
+            for (int i = 0; i < deckList.Count; i++)
+            {
+                manaLabel = new Label
+                {
+                    Text = deckList.Skip(i).First().Card.cost.ToString(),
+                    Location = new Point(startManaX, manaCardY * i + startY),
+                    BackColor = Color.Orange,
+                    Size = new Size(manaCardX, manaCardY),
+                    Font = new Font("Yu Gothic", 15, FontStyle.Bold),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+
+                cardLabel = new Label
+                {
+                    Text = deckList.Skip(i).First().Card.name,
+                    Location = new Point(startCardX, cardTextY * i + startY),
+                    BackColor = Color.Gold,
+                    Size = new Size(cardTextX, cardTextY),
+                    Font = new Font("Yu Gothic", 15, FontStyle.Bold),
+                    TextAlign = ContentAlignment.MiddleRight
+                };
+
+                Application.OpenForms["Form1"].Controls.Add(manaLabel);
+                Application.OpenForms["Form1"].Controls.Add(cardLabel);
+            }
+        }
+
+
     }
 }
