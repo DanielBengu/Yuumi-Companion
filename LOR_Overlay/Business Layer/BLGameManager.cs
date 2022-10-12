@@ -11,19 +11,26 @@ namespace YuumiCompanion.LOR_Overlay.Business_Layer
 {
     internal class BLGameManager
     {
-        public List<CardCanvas> DeckList { get; set; }
+        private List<CardCanvas> _deckList;
+
+        private readonly BLOverlay bLOverlay;
+
+        public BLGameManager()
+        {
+            bLOverlay = new BLOverlay();
+        }
 
         public void ManageGame()
         {
-            DeckList = BLApi.GetDeckList();
+            _deckList = BLApi.GetDeckList();
 
-            RefreshOverlay();
+            RefreshOverlay(_deckList);
         }
 
-        private void RefreshOverlay()
+        private void RefreshOverlay(List<CardCanvas> deckList)
         {
             //TODO: CLEAR PREVIOUS DECK BEFORE UPDATING
-            BLOverlay.UpdateCurrentDecklist(DeckList); 
+            bLOverlay.RefreshCurrentDecklist(_deckList); 
         }
 
         

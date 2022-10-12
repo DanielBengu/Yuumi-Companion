@@ -239,44 +239,65 @@ namespace YuumiCompanion.LOR_Overlay.Business_Layer
         private const int cardTextX = 150;
         private const int cardTextY = 30;
 
+        private List<Label> personalDeck;
+
         public BLOverlay()
         {
             Form1 = Application.OpenForms["Form1"];
+            personalDeck = new List<Label>();
         }
 
-        public static void UpdateCurrentDecklist(List<CardCanvas> deckList)
+        public void RefreshCurrentDecklist(List<CardCanvas> deckList)
         {
-            //PictureBox pb;
             Label manaLabel;
             Label cardLabel;
-
-            for (int i = 0; i < deckList.Count; i++)
+            CardCanvas card;
+            
+            if(deckList != null)
             {
-                manaLabel = new Label
+                if(deckList.Count > 0)
                 {
-                    Text = deckList.Skip(i).First().Card.cost.ToString(),
-                    Location = new Point(startManaX, manaCardY * i + startY),
-                    BackColor = Color.Orange,
-                    Size = new Size(manaCardX, manaCardY),
-                    Font = new Font("Yu Gothic", 15, FontStyle.Bold),
-                    TextAlign = ContentAlignment.MiddleCenter
-                };
+                    for (int i = 0; i < deckList.Count; i++)
+                    {
+                        card = deckList.Skip(i).First();
 
-                cardLabel = new Label
+                        manaLabel = new Label
+                        {
+                            Text = card.Card.cost.ToString(),
+                            Location = new Point(startManaX, manaCardY * i + startY),
+                            BackColor = Color.Orange,
+                            Size = new Size(manaCardX, manaCardY),
+                            Font = new Font("Yu Gothic", 15, FontStyle.Bold),
+                            TextAlign = ContentAlignment.MiddleCenter
+                        };
+
+                        cardLabel = new Label
+                        {
+                            Text = card.Card.name + " x" + card.Quantity,
+                            Location = new Point(startCardX, cardTextY * i + startY),
+                            BackColor = Color.Gold,
+                            Size = new Size(cardTextX, cardTextY),
+                            Font = new Font("Yu Gothic", 8, FontStyle.Bold),
+                            TextAlign = ContentAlignment.MiddleRight
+                        };
+
+                        Form1.Controls.Add(manaLabel);
+                        Form1.Controls.Add(cardLabel);
+
+                        personalDeck.Add(manaLabel);
+                        personalDeck.Add(cardLabel);
+                    }
+                }
+            }
+            else
+            {
+                //First we clear the previous decklist
+                personalDeck.Clear();
+                foreach (Label label in personalDeck)
                 {
-                    Text = deckList.Skip(i).First().Card.name,
-                    Location = new Point(startCardX, cardTextY * i + startY),
-                    BackColor = Color.Gold,
-                    Size = new Size(cardTextX, cardTextY),
-                    Font = new Font("Yu Gothic", 15, FontStyle.Bold),
-                    TextAlign = ContentAlignment.MiddleRight
-                };
-
-                Application.OpenForms["Form1"].Controls.Add(manaLabel);
-                Application.OpenForms["Form1"].Controls.Add(cardLabel);
+                    Form1.Controls.Remove(label);
+                }
             }
         }
-
-
     }
 }

@@ -4,7 +4,7 @@ Runeterra Tracker
 
 # TODO
 
-Link to runeterra exe 
+implement code encoder/decoder
 
 retrieve current game data 
 
