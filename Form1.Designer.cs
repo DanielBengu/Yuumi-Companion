@@ -47,6 +47,7 @@ namespace YuumiCompanion
             // RefreshTimer
             // 
             this.RefreshTimer.Enabled = true;
+            this.RefreshTimer.Interval = 500;
             this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
             // 
             // Form1

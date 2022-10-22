@@ -29,20 +29,8 @@ namespace YuumiCompanion
         {
             GameData gd = BLApi.GetGameData();
 
-            //blGameManager.UpdateCurrentDecklist();
-
-            if (gd != null && gd.GameState == GameData.GameStateEnum.InProgress)
-                blGameManager.ManageGame();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
+            if (gd != null)
+                blGameManager.ManageGame(gd.GameState);
         }
     }
 }

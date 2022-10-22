@@ -239,15 +239,12 @@ namespace YuumiCompanion.LOR_Overlay.Business_Layer
         private const int cardTextX = 150;
         private const int cardTextY = 30;
 
-        private List<Label> personalDeck;
-
         public BLOverlay()
         {
             Form1 = Application.OpenForms["Form1"];
-            personalDeck = new List<Label>();
         }
 
-        public void RefreshCurrentDecklist(List<CardCanvas> deckList)
+        public void RefreshCurrentDecklist(List<CardCanvas> deckList, List<CardCanvas> currentDeck)
         {
             Label manaLabel;
             Label cardLabel;
@@ -268,7 +265,8 @@ namespace YuumiCompanion.LOR_Overlay.Business_Layer
                             BackColor = Color.Orange,
                             Size = new Size(manaCardX, manaCardY),
                             Font = new Font("Yu Gothic", 15, FontStyle.Bold),
-                            TextAlign = ContentAlignment.MiddleCenter
+                            TextAlign = ContentAlignment.MiddleCenter,
+                            Name = "lblMana"
                         };
 
                         cardLabel = new Label
@@ -278,26 +276,39 @@ namespace YuumiCompanion.LOR_Overlay.Business_Layer
                             BackColor = Color.Gold,
                             Size = new Size(cardTextX, cardTextY),
                             Font = new Font("Yu Gothic", 8, FontStyle.Bold),
-                            TextAlign = ContentAlignment.MiddleRight
+                            TextAlign = ContentAlignment.MiddleRight,
+                            Name = "lblCard"
                         };
 
                         Form1.Controls.Add(manaLabel);
                         Form1.Controls.Add(cardLabel);
 
-                        personalDeck.Add(manaLabel);
-                        personalDeck.Add(cardLabel);
+                        currentDeck.Add(card);
                     }
                 }
+                
             }
-            else
+        }
+
+        public void ClearCurrentDecklist()
+        {
+            Control[] manaControls = Form1.Controls.Find("lblMana", false);
+            Control[] cardControls = Form1.Controls.Find("lblCard", false);
+
+            if(manaControls.Length > 0 || cardControls.Length > 0)
             {
-                //First we clear the previous decklist
-                personalDeck.Clear();
-                foreach (Label label in personalDeck)
+                foreach (Control label in manaControls)
+                {
+                    Form1.Controls.Remove(label);
+                }
+
+                foreach (Control label in cardControls)
                 {
                     Form1.Controls.Remove(label);
                 }
             }
+
+
         }
     }
 }
